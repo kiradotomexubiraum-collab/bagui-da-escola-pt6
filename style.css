@@ -1,0 +1,171 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a14;
+  padding: 1rem;
+}
+
+#game-root {
+  width: 100%;
+  max-width: 640px;
+  min-height: 560px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Cenas ── */
+.scene {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 560px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+.scene.active { display: flex; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Tipografia ── */
+.scene-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  opacity: 0.5;
+  color: inherit;
+}
+
+.scene-icon {
+  font-size: 52px;
+  margin-bottom: 1.2rem;
+  line-height: 1;
+}
+
+.scene-title {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: inherit;
+  max-width: 520px;
+}
+
+.scene-text {
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 2rem;
+  opacity: 0.88;
+  color: inherit;
+}
+
+/* ── Botões ── */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+}
+
+button.choice {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: inherit;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, border-color 0.2s;
+  text-align: left;
+  line-height: 1.4;
+}
+button.choice:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: scale(1.025);
+}
+button.choice:active { transform: scale(0.98); }
+
+/* Botão secreto dourado */
+button.choice.secret {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: rgba(255, 215, 0, 0.6);
+  color: #ffe87a;
+  animation: pulse-secret 2s infinite;
+}
+button.choice.secret:hover {
+  background: rgba(255, 215, 0, 0.28);
+  border-color: gold;
+}
+
+@keyframes pulse-secret {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+  50%       { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.18); }
+}
+
+/* Botão Voltar */
+button.back-btn {
+  margin-top: 1.4rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: inherit;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s, transform 0.15s;
+}
+button.back-btn:hover { opacity: 1; transform: scale(1.03); }
+
+/* ── Componentes ── */
+.ending-msg {
+  font-size: 16px;
+  line-height: 1.8;
+  font-style: italic;
+  max-width: 480px;
+  padding: 1.2rem 1.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 1.5rem;
+  color: inherit;
+  opacity: 0.92;
+}
+
+.badge-secret {
+  display: inline-block;
+  background: rgba(255, 215, 0, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  color: #ffe87a;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding: 3px 12px;
+  margin-bottom: 1rem;
+}
+
+/* ── Cores de fundo por cena (imersão dinâmica) ── */
+#scene-capa    { background: linear-gradient(160deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%); color: #e8e8f0; }
+#scene-1       { background: linear-gradient(160deg, #2d1b4e 0%, #1f0f3a 100%); color: #ddd0f5; }
+#scene-2       { background: linear-gradient(160deg, #0d2b1e 0%, #0a3d2e 100%); color: #c8f0dc; }
+#scene-3       { background: linear-gradient(160deg, #3a1a0a 0%, #5c2800 100%); color: #f5d5b0; }
+#scene-4       { background: linear-gradient(160deg, #1a2540 0%, #0e1a35 100%); color: #c5d8f5; }
+#scene-final   { background: linear-gradient(160deg, #1a0a2e 0%, #0d0520 100%); color: #e0c8f5; }
+#scene-secreto { background: linear-gradient(160deg, #1a1400 0%, #2e2400 100%); color: #fff5c0; }
+  
