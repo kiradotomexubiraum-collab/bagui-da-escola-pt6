@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecos do Abismo</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="game-root">
+
+  <!-- ══ CAPA ══ -->
+  <div class="scene active" id="scene-capa">
+    <div class="scene-icon"><i class="ti ti-eye" style="color:#7ba3f5"></i></div>
+    <div class="scene-title" style="font-size:26px; margin-bottom:0.5rem;">Ecos do Abismo</div>
+    <div class="scene-label" style="margin-bottom:1.5rem;">uma aventura interativa</div>
+    <div class="scene-text">
+      Você acorda num corredor de pedra fria. Não há memória antes deste momento —
+      só a sensação de que algo, em algum lugar, ainda te espera.
+    </div>
+    <div class="btn-group">
+      <button class="choice" onclick="goTo('scene-1', 'capa')">
+        <i class="ti ti-arrow-right"></i> Iniciar Aventura
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ CAPÍTULO 1 — O Cruzamento ══ -->
+  <div class="scene" id="scene-1">
+    <div class="scene-label">Capítulo 1 — O Cruzamento</div>
+    <div class="scene-icon"><i class="ti ti-door"></i></div>
+    <div class="scene-title">A Encruzilhada das Sombras</div>
+    <div class="scene-text">
+      O corredor se divide em dois caminhos. À esquerda, uma tocha crepita numa parede de
+      musgo — o cheiro é de terra úmida e segredos antigos. À direita, silêncio absoluto
+      e uma fenda de luz fria, quase artificial, vaza sob uma porta metálica.
+      <br><br>Seu coração acelera. Você tem uma escolha.
+    </div>
+    <div class="btn-group">
+      <button class="choice" onclick="choose('A1', 'scene-2', 'scene-1')">
+        <i class="ti ti-flame"></i> Seguir a tocha — o caminho da pedra e musgo
+      </button>
+      <button class="choice" onclick="choose('B1', 'scene-2', 'scene-1')">
+        <i class="ti ti-door-enter"></i> Abrir a porta metálica — o caminho da luz fria
+      </button>
+    </div>
+    <button class="back-btn" data-voltar="capa" onclick="goBack(this)">
+      <i class="ti ti-arrow-left"></i> Voltar
+    </button>
+  </div>
+
+  <!-- ══ CAPÍTULO 2 — A Câmara ══ -->
+  <div class="scene" id="scene-2">
+    <div class="scene-label">Capítulo 2 — A Câmara</div>
+    <div class="scene-icon"><i class="ti ti-book-2"></i></div>
+    <div class="scene-title">A Sala dos Registros</div>
+    <div class="scene-text">
+      Uma câmara circular se abre à sua frente. As paredes são cobertas de inscrições —
+      nomes, datas, lamentos. No centro, uma mesa de pedra sustenta dois objetos:
+      um diário encadernado em couro escuro e um cristal que pulsa com luz própria.
+      <br><br>Ambos parecem esperar por você.
+    </div>
+    <div class="btn-group">
+      <!--
+        FINAL SECRETO — PASSO 1:
+        Pegar o diário grava choices['A2'] = true.
+        Necessário junto com choices['B3'] para desbloquear o botão oculto na cena 4.
+      -->
+      <button class="choice" onclick="choose('A2', 'scene-3', 'scene-2')">
+        <i class="ti ti-book"></i> Pegar o diário — ler o que está escrito
+      </button>
+      <button class="choice" onclick="choose('B2', 'scene-3', 'scene-2')">
+        <i class="ti ti-diamond"></i> Tocar o cristal — sentir sua vibração
+      </button>
+    </div>
+    <button class="back-btn" data-voltar="scene-1" onclick="goBack(this)">
+      <i class="ti ti-arrow-left"></i> Voltar
+    </button>
+  </div>
+
+  <!-- ══ CAPÍTULO 3 — A Revelação ══ -->
+  <div class="scene" id="scene-3">
+    <div class="scene-label">Capítulo 3 — A Revelação</div>
+    <div class="scene-icon"><i class="ti ti-map"></i></div>
+    <div class="scene-title">O Mapa e o Vazio</div>
+    <div class="scene-text">
+      O conhecimento obtido te guia até uma câmara maior. No centro do chão, um mapa
+      gravado em pedra mostra rotas para fora do Abismo — mas também indica um local
+      marcado como <em>"A Origem"</em>, acompanhado de um símbolo que faz seus olhos
+      doer ao olhar. Dois caminhos partem daqui.
+    </div>
+    <div class="btn-group">
+      <button class="choice" onclick="choose('A3', 'scene-4', 'scene-3')">
+        <i class="ti ti-exit"></i> Seguir a rota de saída — escapar do Abismo
+      </button>
+      <!--
+        FINAL SECRETO — PASSO 2:
+        Investigar a Origem grava choices['B3'] = true.
+        Combinado com choices['A2'], desbloqueia o botão oculto na cena 4.
+      -->
+      <button class="choice" onclick="choose('B3', 'scene-4', 'scene-3')">
+        <i class="ti ti-eye-off"></i> Investigar "A Origem" — encarar o símbolo proibido
+      </button>
+    </div>
+    <button class="back-btn" data-voltar="scene-2" onclick="goBack(this)">
+      <i class="ti ti-arrow-left"></i> Voltar
+    </button>
+  </div>
+
+  <!-- ══ CAPÍTULO 4 — A Bifurcação Final ══ -->
+  <div class="scene" id="scene-4">
+    <div class="scene-label">Capítulo 4 — A Bifurcação Final</div>
+    <div class="scene-icon"><i class="ti ti-stairs"></i></div>
+    <div class="scene-title">O Portal do Eco</div>
+    <div class="scene-text">
+      Você chega a um salão imenso. Uma escadaria desce para um portal banhado em luz
+      púrpura — a saída. Ao seu lado, uma parede rachada vaza um murmúrio que parece
+      chamar seu nome. Algo antigo pulsa por trás da pedra.
+      <br><br>O portal aguarda. O murmúrio insiste.
+    </div>
+    <div class="btn-group" id="btns-scene-4">
+      <button class="choice" onclick="goTo('scene-final', 'scene-4')">
+        <i class="ti ti-door-exit"></i> Cruzar o portal — deixar o Abismo para trás
+      </button>
+      <!--
+        FINAL SECRETO — PASSO 3 (revelação):
+        Começa oculto (display:none).
+        game.js → updateSecretButton() o exibe quando choices['A2'] && choices['B3'].
+      -->
+      <button class="choice secret" id="btn-secret" style="display:none"
+              onclick="goTo('scene-secreto', 'scene-4')">
+        <i class="ti ti-sparkles"></i> ★ Tocar a parede que sussurra seu nome ★
+      </button>
+    </div>
+    <button class="back-btn" data-voltar="scene-3" onclick="goBack(this)">
+      <i class="ti ti-arrow-left"></i> Voltar
+    </button>
+  </div>
+
+  <!-- ══ FINAL NORMAL ══ -->
+  <div class="scene" id="scene-final">
+    <div class="scene-label">Epílogo</div>
+    <div class="scene-icon"><i class="ti ti-sun"></i></div>
+    <div class="scene-title">A Superfície</div>
+    <!-- Preenchido aleatoriamente por game.js → setEndingMsg() -->
+    <div class="ending-msg" id="ending-random"></div>
+    <div class="scene-text" style="margin-bottom:1.5rem; font-size:13px; opacity:0.6;">
+      <em>Final obtido: O Retorno</em>
+    </div>
+    <div class="btn-group">
+      <button class="choice" onclick="restart()">
+        <i class="ti ti-refresh"></i> Jogar novamente
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ FINAL SECRETO ══ -->
+  <div class="scene" id="scene-secreto">
+    <div class="badge-secret"><i class="ti ti-lock-open"></i> Final Secreto Desbloqueado</div>
+    <div class="scene-icon" style="font-size:48px">
+      <i class="ti ti-infinity" style="color:#ffe87a"></i>
+    </div>
+    <div class="scene-title">A Origem</div>
+    <div class="scene-text">
+      Ao tocar a pedra, ela se dissolve como fumaça. Por trás dela não há mais corredor
+      — há memória. Suas próprias memórias, apagadas antes de você "acordar" aqui.
+      Você não entrou no Abismo por acidente.
+      <br><br>Você o <strong>construiu</strong>. E agora, finalmente, lembra de tudo.
+      <br><br>O Abismo se desfaz ao seu redor como um sonho que não precisa mais de você.
+      Você não escapa — você <em>encerra</em>.
+    </div>
+    <div class="ending-msg"
+         style="background:rgba(255,215,0,0.1); border-color:rgba(255,215,0,0.3); color:#ffe87a;">
+      "Alguns labirintos só existem porque alguém se esqueceu de que era o arquiteto."
+    </div>
+    <div class="btn-group">
+      <button class="choice" onclick="restart()">
+        <i class="ti ti-refresh"></i> Recomeçar do início
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script src="game.js"></script>
+</body>
+  </html>
+  
